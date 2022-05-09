@@ -63,7 +63,7 @@ to the full width and height of our viewport. Here they are:</p>
 <p>Now that we have our scales, we can create a coordinate system. Coordinate
 systems in CandyGraph wrap scales and add a little more GLSL glue code for
 use on the GPU. Here we’ll create a cartesian coordinate system:</p>
-<pre><code class="language-typescript">  const coords = createCartesianCoordinateSystem(xscale, yscale);
+<pre><code class="language-typescript">  const coords = createCartesianCoordinateSystem(cg, xscale, yscale);
 </code></pre>
 <p>Next we’re going to make some data for our plot. We’ll loop through 0 to 2π
 with a small increment for our x-values, and calculate the sine of each of
@@ -268,7 +268,7 @@ of 1 to 100000:</p>
 </code></pre>
 <p>Then we’ll create our coordinate system, grab the default font, clear the
 canvas, and render our data with axes:</p>
-<pre><code class="language-typescript">  const coords = createCartesianCoordinateSystem(xscale, yscale);
+<pre><code class="language-typescript">  const coords = createCartesianCoordinateSystem(cg, xscale, yscale);
   const font = await createDefaultFont(cg);
 
   cg.clear([1, 1, 1, 1]);
@@ -439,6 +439,7 @@ of data:</p>
 system with a bit of padding for our axes:</p>
 <pre><code class="language-typescript">  const viewport = { x: 0, y: 0, width: 1024, height: 384 };
   const coords = createCartesianCoordinateSystem(
+    cg,
     createLinearScale([-history, 0], [40, viewport.width - 16]),
     createLinearScale([-1, 1], [32, viewport.height - 16])
   );
@@ -585,8 +586,8 @@ y-axis:</p>
   const liny = createLinearScale([0, 10000], [24, viewport.height - 16]);
   const logy = createLogScale(10, [1, 10000], [24, viewport.height - 16]);
 
-  const linlin = createCartesianCoordinateSystem(linx, liny);
-  const linlog = createCartesianCoordinateSystem(linx, logy);
+  const linlin = createCartesianCoordinateSystem(cg, linx, liny);
+  const linlog = createCartesianCoordinateSystem(cg, linx, logy);
 </code></pre>
 <p>We’ll also hold onto our higher-level constructs by assigning them to a
 variable and keeping that reference to them, preventing garbage collection.</p>

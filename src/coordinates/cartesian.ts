@@ -1,3 +1,4 @@
+import { CandyGraph } from "../candygraph";
 import { Regl, DrawCommand } from "regl";
 import { Vector2 } from "../common";
 import { CoordinateSystem, Kind } from "./coordinate-system";
@@ -12,10 +13,11 @@ type Props = {
 };
 
 export function createCartesianCoordinateSystem(
+  cg: CandyGraph,
   xscale: LinearScale | LogScale,
   yscale: LinearScale | LogScale
 ) {
-  return new CartesianCoordinateSystem(xscale, yscale);
+  return new CartesianCoordinateSystem(cg, xscale, yscale);
 }
 
 export class CartesianCoordinateSystem extends CoordinateSystem {
@@ -23,6 +25,7 @@ export class CartesianCoordinateSystem extends CoordinateSystem {
   public readonly kind = Kind.Cartesian;
 
   constructor(
+    private cg: CandyGraph,
     public readonly xscale: LinearScale | LogScale,
     public readonly yscale: LinearScale | LogScale
   ) {
@@ -83,5 +86,9 @@ export class CartesianCoordinateSystem extends CoordinateSystem {
       xrange: this.xscale.range,
       yrange: this.yscale.range,
     };
+  }
+
+  public dispose() {
+    this.cg.clearCoordinateCache(this);
   }
 }

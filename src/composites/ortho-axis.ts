@@ -41,7 +41,7 @@ export class OrthoAxis extends Composite {
   private axis: Renderable = [];
 
   constructor(
-    cg: CandyGraph,
+    private cg: CandyGraph,
     coords: CartesianCoordinateSystem,
     axis: "x" | "y",
     font: Font,
@@ -153,5 +153,9 @@ export class OrthoAxis extends Composite {
 
   public children(): Renderable {
     return this.axis;
+  }
+
+  public dispose() {
+    this.cg.clearCompositeCache(this);
   }
 }

@@ -82,7 +82,7 @@ export class Axis extends Composite {
   private minorTicks: Renderable = [];
 
   constructor(
-    cg: CandyGraph,
+    private cg: CandyGraph,
     coords: CoordinateSystem,
     start: Vector2,
     end: Vector2,
@@ -297,6 +297,10 @@ export class Axis extends Composite {
 
   public children(): Renderable {
     return [this.axis, this.ticks, this.minorTicks, this.texts];
+  }
+
+  public dispose() {
+    this.cg.clearCompositeCache(this);
   }
 }
 

@@ -22,6 +22,7 @@ export default function Shapes(cg: CandyGraph) {
   const viewport = { x: 0, y: 0, width: 384 * dpr, height: 384 * dpr };
 
   const coords = createCartesianCoordinateSystem(
+    cg,
     createLinearScale([0, 2 * Math.PI], [0, viewport.width]),
     createLinearScale([-1, 1], [0, viewport.height])
   );

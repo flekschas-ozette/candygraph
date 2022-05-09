@@ -34,7 +34,7 @@ export default function doc_00100(cg: CandyGraph): void {
   // Now that we have our scales, we can create a coordinate system. Coordinate
   // systems in CandyGraph wrap scales and add a little more GLSL glue code for
   // use on the GPU. Here we'll create a cartesian coordinate system:
-  const coords = createCartesianCoordinateSystem(xscale, yscale);
+  const coords = createCartesianCoordinateSystem(cg, xscale, yscale);
 
   // Next we're going to make some data for our plot. We'll loop through 0 to 2π
   // with a small increment for our x-values, and calculate the sine of each of

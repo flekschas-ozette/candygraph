@@ -20,7 +20,7 @@ export default async function doc_00200(cg: CandyGraph) {
   const xscale = createLinearScale([0, 2 * Math.PI], [0, viewport.width]);
   const yscale = createLinearScale([-1, 1], [0, viewport.height]);
 
-  const coords = createCartesianCoordinateSystem(xscale, yscale);
+  const coords = createCartesianCoordinateSystem(cg, xscale, yscale);
 
   const xs = [];
   const ys = [];

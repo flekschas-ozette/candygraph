@@ -73,4 +73,8 @@ export class Font {
   public kern(first: number, second: number) {
     return this.kernTable[first * this.maxid + second];
   }
+
+  public dispose() {
+    this.texture.destroy();
+  }
 }

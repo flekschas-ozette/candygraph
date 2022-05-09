@@ -41,7 +41,7 @@ export class Grid extends Composite {
   private grid: Renderable = [];
 
   constructor(
-    cg: CandyGraph,
+    private cg: CandyGraph,
     xPositions: NumberArray,
     yPositions: NumberArray,
     xExtents: Vector2,
@@ -71,5 +71,9 @@ export class Grid extends Composite {
 
   public children(): Renderable {
     return this.grid;
+  }
+
+  public dispose() {
+    this.cg.clearCompositeCache(this);
   }
 }

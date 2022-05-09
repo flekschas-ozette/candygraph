@@ -41,7 +41,7 @@ export default async function doc_00300(cg: CandyGraph) {
 
   // Then we'll create our coordinate system, grab the default font, clear the
   // canvas, and render our data with axes:
-  const coords = createCartesianCoordinateSystem(xscale, yscale);
+  const coords = createCartesianCoordinateSystem(cg, xscale, yscale);
   const font = await createDefaultFont(cg);
 
   cg.clear([1, 1, 1, 1]);

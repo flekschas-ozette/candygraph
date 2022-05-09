@@ -1,3 +1,4 @@
+import { CandyGraph } from "../candygraph";
 import { Regl, DrawCommand } from "regl";
 import { vec2 } from "gl-matrix";
 import { Vector2 } from "../common";
@@ -17,12 +18,13 @@ type Props = {
 };
 
 export function createPolarCoordinateSystem(
+  cg: CandyGraph,
   radialScale: LinearScale | LogScale,
   angularScale: LinearScale | LogScale,
   xScale: LinearScale | LogScale,
   yScale: LinearScale | LogScale
 ) {
-  return new PolarCoordinateSystem(radialScale, angularScale, xScale, yScale);
+  return new PolarCoordinateSystem(cg, radialScale, angularScale, xScale, yScale);
 }
 
 export class PolarCoordinateSystem extends CoordinateSystem {
@@ -30,6 +32,7 @@ export class PolarCoordinateSystem extends CoordinateSystem {
   public readonly kind = Kind.Polar;
 
   constructor(
+    private cg: CandyGraph,
     public readonly radialScale: LinearScale | LogScale,
     public readonly angularScale: LinearScale | LogScale,
     public readonly xScale: LinearScale | LogScale,
@@ -145,5 +148,9 @@ export class PolarCoordinateSystem extends CoordinateSystem {
       yDomain: this.yScale.domain,
       yRange: this.yScale.range,
     };
+  }
+
+  public dispose() {
+    this.cg.clearCoordinateCache(this);
   }
 }
